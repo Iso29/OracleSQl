@@ -1,0 +1,52 @@
+create table Person(
+    Person_ID number,
+    p_name nvarchar2(25) not null,
+    p_surname nvarchar2(25) not null,
+    age number not null 
+);
+
+alter table Person add E_mail nvarchar2(35) constraint not_null_Email not null;
+
+alter table Person add constraint pk_Person_ID primary key(Person_ID);
+
+alter table Person rename constraint NOT_NULL_EMAIL to not_null_E_mail ;
+alter table Person add constraint check_age check(age>18);
+
+alter table person drop constraint not_null_E_mail;
+
+select * from user_tables;
+select * from user_views;
+select * from user_constraints where (table_name ='PERSON');
+
+alter table Person add country nvarchar2(25) constraint check_initcap_country check(country=initcap(country));
+
+alter table Person drop constraint SYS_C008322;
+
+alter table Person modify p_name constraint check_not_null_Pname not null;
+alter table Person rename constraint SYS_C008323 to check_not_null_Psurname;
+
+alter table Person add phone_number nvarchar2(13);
+select * from person;
+alter table Person add constraint unique_value unique (E_MAIL,Phone_number);
+
+create table employee(
+    Employee_ID number constraint pk_Employee_ID primary key,
+    E_name nvarchar2(25),
+    E_surname nvarchar2(25),
+    E_age number constraint check_E_age check(E_age>18)
+);  
+
+alter table employee modify E_name constraint not_null_E_name not null;
+alter table employee modify E_surname constraint not_null_E_surname not null;
+alter table employee modify E_age constraint not_null_E_age not null;
+
+alter table employee add E_address nvarchar2(30) constraint  check_not_null_E_address  not null;
+
+alter table employee rename constraint not_null_E_name to check_not_null_E_name;
+alter table employee rename constraint not_null_E_surname to check_not_null_E_surname;
+alter table employee rename constraint not_null_E_age to check_not_null_E_age;
+
+alter table employee add constraint check_initcap_E_name check(E_name=initcap(E_name));
+alter table employee add constraint check_initcap_E_surname check(E_surname=initcap(E_surname));
+select * from user_constraints where table_name=upper('employee');
+select * from employee;
