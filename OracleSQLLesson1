@@ -1,0 +1,30 @@
+create table Person (
+    "name" nvarchar2(25),
+    surname nvarchar2(25),
+    "birth day" date
+); 
+
+alter table Person rename to Person#;
+
+alter table Person# rename column "birth day" to birth_day;
+
+alter table Person# add "address" nvarchar2(55);
+
+alter table Person# modify "address" nvarchar2(70);
+
+alter table Person# add "E-mail" nvarchar2(50);
+
+alter table Person# drop column "E-mail";
+
+drop table Person#;
+flashback table Person# to before drop;
+
+insert into Person# values('Ismayil','Islamzade',to_date('29.03.2003','dd.mm.yyyy'),'','');
+insert into Person# values('Murad','Axundov',to_date('15.10.2003','dd.mm.yyyy'),'','');
+insert into Person# values('Nihad','Asgerli',to_date('14.12.2003','dd.mm.yyyy'),'','');
+insert into Person# values('Huseyn','Memmedli',to_date('29.01.2003','dd.mm.yyyy'),'','');
+insert into Person# values('Mayil','Azmemmedov',to_date('12.02.2003','dd.mm.yyyy'),'','');
+insert into Person# values('Murad','Mehdiyev',to_date('04.09.2003','dd.mm.yyyy'),'','');
+insert into Person# values('Royal','Atakhiyev',to_date('19.05.2003','dd.mm.yyyy'),'','');
+
+select "name" ,surname,to_char(birth_day,'dd.mm.yyyy'),"address","E-mail" from Person#;
