@@ -1,0 +1,59 @@
+create table Taxi_car (
+car_ID number constraint pk_car_ID primary key,
+mark_name nvarchar2(15) constraint mark_name_not_null not null,
+model_name nvarchar2(15) constraint model_name_not_null not null,
+registration_number nvarchar2(9) constraint unique_registration_num unique ,
+ban_type nvarchar2(15),
+car_category nvarchar2(10)
+);
+
+create table Taxi_driver(
+Driver_id number constraint pk_Driver_ID primary key,
+driver_name nvarchar2(25) constraint driver_name_not_null not null,
+driver_surname nvarchar2(25) constraint driver_surname_not_null not null,
+birth_date date constraint birth_date_not_null not null ,
+driver_lisence nvarchar2(9) constraint unique_driver_lisence UNIQUE
+);
+
+create table customer(
+customer_ID number constraint pk_customer_ID primary key,
+customer_name nvarchar2(25) constraint customer_name_not_null not null,
+customer_surname nvarchar2(25) constraint customer_surname_not_null not null,
+customer_phone nvarchar2(13) constraint unique_phone_number unique
+);
+
+create table Orders(
+order_ID number constraint pk_order_ID primary key,
+customer_ID number ,
+driver_ID number ,
+taxi_car_ID number ,
+order_cost number constraint not_null_cost not null,
+start_location nvarchar2(30),
+finish_location nvarchar2(30),
+start_order_time date ,
+finish_order_time date,
+constraint fk_customer_ID foreign key (customer_ID) references customer(customer_ID) on delete cascade,
+constraint fk_driver_ID foreign key (driver_ID) references Taxi_driver(driver_ID) on delete set null,
+constraint fk_taxi_car_ID foreign key (taxi_car_ID) references Taxi_car(car_ID) on delete set null
+);
+
+drop table Orders;
+select * from Taxi_car;
+select * from Taxi_driver;
+select * from customer;
+select * from Orders;
+
+alter table Orders rename column order_cost to "order_cost (manat)";
+
+insert into Taxi_car values(1,'Toyota','Prius','AZ70EY071','sedan','ECO');
+insert into Taxi_driver values(1,'Murad','Axundov',to_date('15.10.2003','dd.mm.yyyy'),'1310831');
+insert into customer values(1,'Ismayil','Islamzade','+994552701894');
+insert into Orders values(1,1,1,1,5,'insaatcilar','28 May',to_date('23.09.2022:08:00:00','dd.mm.yyyy:hh24:mi:ss'),to_date('23.09.2022:08:30:00','dd.mm.yyyy:hh24:mi:ss'));
+
+delete from taxi_driver where driver_ID =1;
+
+drop table Orders;
+
+delete from customer where customer_ID =1;
+
+
