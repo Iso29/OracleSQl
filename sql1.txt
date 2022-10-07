@@ -1,0 +1,53 @@
+select * from products where standard_cost in((select max(standard_cost) from products),(select min(standard_cost) from products));
+
+select * from locations where city in('Roma','Tokyo','Toronto','Munich');
+
+select * from products where standard_cost between 100 and 300;
+
+select * from products where standard_cost between 100 and 300;
+
+select * from employees where lower(first_name) like 'a%' and lower(last_name) like '%a%';
+
+select * from employees where first_name in (select distinct(first_name) from employees);
+
+select * from employees where manager_id is null;
+
+select * from user_tables where lower(TABLE_NAME) like '%test%';
+
+select * from employees where employee_id = &emp_id;
+
+select * from products;
+select * from products where standard_cost = (select max(standard_cost) from products);
+
+select * from products order by standard_cost desc fetch next 3 rows only;
+select * from products order by standard_cost desc offset 3 rows fetch next 3 rows only;
+
+create table amounts (
+A_id number ,
+Avalue number
+);
+
+insert into amounts values(1,2000);
+insert into amounts values(2,4000);
+insert into amounts values(3,2300);
+insert into amounts values(4,12010);
+
+select * from amounts order by Avalue desc fetch first 3 rows only;
+
+select * from amounts order by Avalue desc fetch first 3 rows with ties;
+select round(12.787,2) from dual;
+select ceil(12.22) from dual;
+select trunc(12.9827) from dual;
+select sqrt(16) from dual;
+select power(2,2) from dual;
+select round(avg(standard_cost),2) as mean from products;
+select median(standard_cost) from products;
+select standard_cost from products where standard_cost=573.46;
+select count(standard_cost) from products;
+select variance(standard_cost) from products;
+select stddev(standard_cost) from products;
+select ntile(3) over(order by Avalue desc) as komanda ,a.* from amounts a; 
+select trunc(sysdate,'year') from dual;
+select level from dual connect by level<10;
+
+
