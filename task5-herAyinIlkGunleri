@@ -1,0 +1,1 @@
+select distinct last_day(trunc(to_date('07-12-2021','dd-mm-yyyy'),'month')+level)+1 from dual connected by level<1000;
