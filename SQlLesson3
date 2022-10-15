@@ -56,4 +56,14 @@ drop table Orders;
 
 delete from customer where customer_ID =1;
 
+----------------------------------------------
 
+create table employee (
+employe_id number generated always as identity,
+first_name nvarchar2(50)not null ,
+last_name nvarchar2(50)not null,
+age number check(age>18)not null,
+address nvarchar2(250)
+);
+ -- 2 ve daha artiq setire 1 constraint elave etdikde , constraintin xususiyyeti yalzin o columnlar birlikde nezerde tutulduqda kecerli olur
+alter table employee add constraint unique_name unique (first_name ,last_name);
