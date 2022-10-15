@@ -1,0 +1,6 @@
+select c.* ,rank()over(partition by filial_id order by amount) from contract c;
+-- siraliyir ve rank verir, amount-a gore azdan coxa siraliyir ,filial id-a gore de qruplasdirir
+
+select c.* ,dense_rank()over(partition by filial_id order by amount) from contract c;
+-- eyni funksiyani yerine yetirir lakin ferq ondadirki , rank() functionunda eyni rank olanda saymaya qaldigi yerden devam edir row sayisina gore, lakin dense_rank() da ise mes (1,1,1 verib 3 columna ard arda sonraki colum ise 2 den basliyacaq)
+select * from contract;
