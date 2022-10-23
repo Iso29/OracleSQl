@@ -1,0 +1,3 @@
+select distinct c.customer_id, c.name, listagg(l.city, ',') over (partition by c.customer_id) 
+from customers c, locations l 
+where l.location_id not in (select w.location_id from warehouses w where w.warehouse_id not in (select i.warehouse_id from inventories i where i.product_id not in (select p.product_id from products p where p.product_id not in (select oi.product_id from order_items oi where oi.order_id not in (select o.order_id from orders o where o.customer_id not in (select c.customer_id from customers c)))))) order by c.customer_id;
